@@ -10,9 +10,11 @@ std::vector<int> ReadBytes(std::ifstream& file, int len);
 std::string ConvertToAddress(std::vector<int>::iterator begin,
                              std::vector<int>::iterator end);
 
-uint16_t Parse16bit(std::ifstream& file, Order order);
+uint16_t Parse16bit(std::ifstream& file, Order order = Order::little_endian);
 
-uint32_t Parse32bit(std::ifstream& file, Order order);
+uint32_t Parse32bit(std::ifstream& file, Order order = Order::little_endian);
+
+uint64_t Parse64bit(std::ifstream& file, Order order = Order::little_endian);
 
 void SkipBytes(std::ifstream& file, int len);
 
