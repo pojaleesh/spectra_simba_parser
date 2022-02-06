@@ -1,4 +1,4 @@
-#include "../utils.h"
+#include "../utils/utils.h"
 #include "sbe_message_parser.h"
 #include "simba_spectra_decoder.h"
 
@@ -10,7 +10,6 @@ void SimbaSpectraDecoder::Parse(std::ifstream& file)
     length_ -= 16;
     auto msg_flags = market_data_packet_header_parser_->GetFlags();
     if ((msg_flags & 0x8) == 0x8) {
-        //std::cout << "Here" << "\n";
         incremental_packet_parser_ = std::make_unique<IncrementalPacketParser>(
             order_, length_);
         incremental_packet_parser_->Parse(file);

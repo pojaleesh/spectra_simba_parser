@@ -1,7 +1,7 @@
 #pragma once
 
+#include "../utils/utils.h"
 #include "abstract_parser.h"
-#include "../utils.h"
 
 class OrderBookSnapshotParser : public AbstractParser {
 public:

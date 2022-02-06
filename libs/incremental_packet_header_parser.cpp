@@ -1,15 +1,13 @@
-#include "../utils.h"
+#include "../utils/utils.h"
 #include "incremental_packet_header_parser.h"
 
 #include <iostream>
 
 void IncrementalPacketHeaderParser::Parse(std::ifstream& file)
 {
-    //std::cout << "-------IncrementalPacketHeaderParser--------\n"; 
     header_.transaction_time = Parse64bit(file, order_);
     header_.exchange_trading_session_id = Parse32bit(file, order_);
     parsed_length_ += 12;
-    //std::cout << "-------IncrementalPacketHeaderParser--------\n" << std::endl; 
 }
 
 void IncrementalPacketHeaderParser::PrintInfo() const
@@ -37,7 +35,6 @@ void IncrementalPacketParser::Parse(std::ifstream& file)
         length_ -= sbe_parser.GetParsedLength();
         sbe_messages_.push_back(std::move(sbe_parser));
     }
-    std::cout << length_ << "\n";
     SkipBytes(file, length_);
 }
 

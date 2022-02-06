@@ -1,3 +1,4 @@
+#include "../utils/utils.h"
 #include "order_book_snapshot_parser.h"
 
 #include <iostream>
@@ -15,7 +16,6 @@ static std::unordered_map<char, std::string> MDEntryType {
 
 void OrderBookSnapshotParser::Parse(std::ifstream& file)
 {
-    //std::cout << "-------------------------OrderBookSnapshotParser----------------" << std::endl;
     packet_.security_id = Parse32bitSigned(file, order_);
     packet_.last_msg_seq_num_processed = Parse32bit(file, order_);
     packet_.rpt_seq = Parse32bit(file, order_);
@@ -35,7 +35,6 @@ void OrderBookSnapshotParser::Parse(std::ifstream& file)
         packet_.records.push_back(record);
         parsed_length_ += 49;
     }
-    //std::cout << "-------------------------OrderBookSnapshotParser----------------" << std::endl;
 }
 
 void OrderBookSnapshotParser::PrintInfo() const

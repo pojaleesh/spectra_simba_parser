@@ -1,7 +1,7 @@
 #pragma once
 
+#include "../utils/types.h"
 #include "abstract_parser.h"
-#include "../types.h"
 #include "sbe_message_parser.h"
 
 #include <memory>

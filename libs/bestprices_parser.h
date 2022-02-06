@@ -1,11 +1,10 @@
 #pragma once
 
+#include "../utils/types.h"
 #include "abstract_parser.h"
-#include "../types.h"
 #include "bestprices_parser.h"
 
 #include <memory>
-#include <vector>
 
 // Так как размер BestPrices изначально не известен, то этот парсер просто нужен
 // для того, чтобы прочитать  NoMDEntries и скипнуть ненужные байты

@@ -1,4 +1,6 @@
+#include "../utils/types.h"
 #include "order_update_parser.h"
+
 #include <iostream>
 
 static std::unordered_map<uint64_t, std::string> MDFlagsSet = {

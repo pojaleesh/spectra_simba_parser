@@ -1,4 +1,4 @@
-#include "../utils.h"
+#include "../utils/utils.h"
 #include "bestprices_parser.h"
 #include "order_book_snapshot_parser.h"
 #include "order_execution_parser.h"
@@ -9,12 +9,10 @@
 
 void SBEHeaderParser::Parse(std::ifstream& file)
 {
-    //std::cout << "-------SBEHeaderParser--------" << std::endl; 
     header_.block_length = Parse16bit(file, order_);
     header_.template_id = Parse16bit(file, order_);
     header_.schema_id = Parse16bit(file, order_);
     header_.version = Parse16bit(file, order_);
-    //std::cout << "-------SBEHeaderParser--------" << std::endl; 
 }
 
 void SBEHeaderParser::PrintInfo() const
@@ -64,8 +62,6 @@ std::pair<MsgId, std::string> SBEHeaderParser::GetMessageId() const
         default:
              break;
     }
-    std::cout << header_.template_id << std::endl;
-    this->PrintInfo();
     throw 1;
 }
 

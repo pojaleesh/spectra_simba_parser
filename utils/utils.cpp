@@ -18,7 +18,6 @@ std::vector<int> ReadBytes(std::ifstream& file, int len)
     std::vector<int> result;
     for (int i = 0; i < len; i++) {
         result.push_back(file.get());
-        //std::cout << "read: " << int_to_hex(result.back()) << std::endl;
     }
     return result;
 }
@@ -132,8 +131,6 @@ std::string ConvertToAddress(std::vector<int>::iterator begin,
 void SkipBytes(std::ifstream& file, int len)
 {
     while (len--) {
-        //int temp = file.get();
         file.get();
-        //std::cout << "skip: " << int_to_hex(temp) << "\n";
     }
 }

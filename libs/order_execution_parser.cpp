@@ -1,4 +1,5 @@
 #include "order_execution_parser.h"
+
 #include <iostream>
 
 static std::unordered_map<uint64_t, std::string> MDFlagsSet = {
@@ -27,7 +28,6 @@ static std::unordered_map<char, std::string> MDEntryType {
 
 void OrderExecutionParser::Parse(std::ifstream& file)
 {
-    std::cout << "-------------------------OrderExecutionParser----------------" << std::endl;
     packet_.md_entry_id = Parse64bitSigned(file, order_);
     packet_.md_entry_px = Parse64bitSigned(file, order_);
     packet_.md_entry_size = Parse64bit(file, order_);
@@ -40,7 +40,6 @@ void OrderExecutionParser::Parse(std::ifstream& file)
     packet_.md_update_action = Parse8bit(file, order_);
     packet_.md_entry_type = Parse8bit(file, order_);
     parsed_length_ += 66;
-    std::cout << "-------------------------OrderExecutionParser----------------" << std::endl;
 }
 
 void OrderExecutionParser::PrintInfo() const
