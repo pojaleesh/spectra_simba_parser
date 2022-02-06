@@ -44,17 +44,17 @@ void OrderExecutionParser::Parse(std::ifstream& file)
 
 void OrderExecutionParser::PrintInfo() const
 {
-
+    std::cout << "Order execution info:\n";
     std::cout << "MD entry id (Идентификатор заявки): "
         << packet_.md_entry_id << "\n";
     if (packet_.md_entry_px == DECIMAL5_NULL) {
-        std::cout << "MD entry px (Цена заявки): null" << "\n";
+        std::cout << "MD entry px (Цена заявки): null\n";
     } else {
         std::cout << "MD entry px (Цена заявки): "
             << 0.00001 * packet_.md_entry_px << "\n";
     }
     if (packet_.md_entry_size == INT64_NULL) {
-        std::cout << "MD entry size (Объем заявки): null" << "\n";
+        std::cout << "MD entry size (Объем заявки): null\n";
     } else {
         std::cout << "MD entry size (Объем заявки): "
             << packet_.md_entry_size << "\n";
@@ -76,7 +76,7 @@ void OrderExecutionParser::PrintInfo() const
         }
     }
     if (!flag_number) {
-        std::cout << "Никаких флагов в MD Flags" << "\n";
+        std::cout << "Никаких флагов в MD Flags\n";
     }
 
     std::cout << "Security id (Числовой идентификатор инструмента.): " 
@@ -86,7 +86,7 @@ void OrderExecutionParser::PrintInfo() const
     std::cout << "MD Update action (Тип инкрементального обновления): " 
         << MDUpdateAction[packet_.md_update_action] << "\n";
     std::cout << "MD entry type (Тип записи): " 
-        << MDEntryType[packet_.md_entry_type] << "\n" << std::endl;
+        << MDEntryType[packet_.md_entry_type] << "\n\n";
 }
 
 int OrderExecutionParser::GetParsedLength() const

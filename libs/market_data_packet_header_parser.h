@@ -7,9 +7,8 @@
 
 class MarketDataPacketHeaderParser : public AbstractParser {
 public:
-    MarketDataPacketHeaderParser(Order order, int length)
+    MarketDataPacketHeaderParser(Order order)
         : order_(order)
-        , length_(length)
         , parsed_length_(0)
     { }
 
@@ -21,10 +20,9 @@ public:
 
 private:
     Order order_;
-    int length_;
     MarketDataPacketHeader header_;
     int parsed_length_;
 };
 
 std::unique_ptr<AbstractParser> CreateMarketDataPacketHeaderParser(
-    Order order_, int length);
+    Order order_);

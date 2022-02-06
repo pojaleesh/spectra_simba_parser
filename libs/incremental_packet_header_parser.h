@@ -9,9 +9,8 @@
 
 class IncrementalPacketHeaderParser : public AbstractParser {
 public:
-    IncrementalPacketHeaderParser(Order order, int length)
+    IncrementalPacketHeaderParser(Order order)
         : order_(order)
-        , length_(length)
         , parsed_length_(0)
     { }
  
@@ -20,7 +19,6 @@ public:
     int GetParsedLength() const override;
 
 private:
-    int length_;
     Order order_;
     IncrementalPacketHeader header_;
     int parsed_length_;
@@ -31,7 +29,7 @@ public:
     IncrementalPacketParser(Order order, int length)
         : order_(order)
         , length_(length)
-        , header_parser_(order, ProtocolLength::incremental_packet_header_length)
+        , header_parser_(order)
         , parsed_length_(0)
     { }
 

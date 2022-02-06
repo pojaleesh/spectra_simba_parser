@@ -18,6 +18,7 @@ void PcapDataParser::Parse(std::ifstream& file)
 
 void PcapDataParser::PrintInfo() const
 {
+    std::cout << "Pcap data parser(udp) info:\n";
     std::cout << "Header check sum: "
         << data_.header_check_sum << "\n";
     std::cout << "Source address: "

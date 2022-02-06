@@ -45,6 +45,7 @@ void OrderUpdateParser::Parse(std::ifstream& file)
 
 void OrderUpdateParser::PrintInfo() const
 {
+    std::cout << "Order update parser info:\n";
     std::cout << "MD entry id (Идентификатор заявки): "
         << packet_.md_entry_id << "\n";
     std::cout << "MD entry px (Цена заявки): "
@@ -62,7 +63,7 @@ void OrderUpdateParser::PrintInfo() const
         }
     }
     if (flag_number == 0) {
-        std::cout << "Никаких флагов в MD Flags" << "\n";
+        std::cout << "Никаких флагов в MD Flags\n";
     }
 
     std::cout << "Security id (Числовой идентификатор инструмента.): " 
@@ -72,7 +73,7 @@ void OrderUpdateParser::PrintInfo() const
     std::cout << "MD Update action (Тип инкрементального обновления): " 
         << MDUpdateAction[packet_.md_update_action] << "\n";
     std::cout << "MD entry type (Тип записи): " 
-        << MDEntryType[packet_.md_entry_type] << "\n" << std::endl;
+        << MDEntryType[packet_.md_entry_type] << "\n\n";
 }
 
 int OrderUpdateParser::GetParsedLength() const

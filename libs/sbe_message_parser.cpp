@@ -18,6 +18,7 @@ void SBEHeaderParser::Parse(std::ifstream& file)
 
 void SBEHeaderParser::PrintInfo() const
 {
+    std::cout << "SBE header info:\n";
     std::cout << "SBE header block length (Длина корневой части): " 
         << header_.block_length << "\n";
     std::cout << "SBE header template id (Идентификатор сообщения): "
@@ -25,7 +26,7 @@ void SBEHeaderParser::PrintInfo() const
     std::cout << "SBE schema id (Идентификатор схемы сообщений): "
         << header_.schema_id << "\n";
     std::cout << "SBE version (Версия схемы): "
-        << header_.version << "\n" << std::endl;
+        << header_.version << "\n\n";
 }
 
 std::pair<MsgId, std::string> SBEHeaderParser::GetMessageId() const 
@@ -108,9 +109,9 @@ void SBEParser::PrintInfo() const
         std::cout << "Так как пакет не является: OrderUpdate | OrderExecution | OrderBookSnapshot" 
             << " => не парсим по условию задания\n";
     }
-    if (header_parser_->GetMessageId().first == MsgId::OrderUpdate 
-        || header_parser_->GetMessageId().first == MsgId::OrderExecution
-        || header_parser_->GetMessageId().first == MsgId::OrderBookSnapshot) {
+    if (header_parser_->GetMessageId().first == MsgId::OrderUpdate ||
+        header_parser_->GetMessageId().first == MsgId::OrderExecution ||
+        header_parser_->GetMessageId().first == MsgId::OrderBookSnapshot) {
         root_parser_->PrintInfo();
     }
 }

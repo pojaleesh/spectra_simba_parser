@@ -16,5 +16,6 @@ void SnapshotPacketParser::Parse(std::ifstream& file)
 
 void SnapshotPacketParser::PrintInfo() const
 {
+    std::cout << "Snaphot packet info:\n";
     sbe_message_.PrintInfo();
 }

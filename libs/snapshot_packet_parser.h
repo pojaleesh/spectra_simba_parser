@@ -6,9 +6,8 @@
 
 class SnapshotPacketParser : public AbstractParser {
 public:
-    SnapshotPacketParser(Order order, int length)
+    SnapshotPacketParser(Order order)
         : order_(order)
-        , length_(length)
         , sbe_message_(order_)
         , parsed_length_(0)
     { }
@@ -19,7 +18,6 @@ public:
 
 private:
     Order order_;
-    int length_;
     SBEParser sbe_message_;
     int parsed_length_;
 };

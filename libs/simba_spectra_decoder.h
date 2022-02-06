@@ -11,7 +11,7 @@ public:
         : order_(order)
         , length_(length)
         , market_data_packet_header_parser_(
-            std::make_unique<MarketDataPacketHeaderParser>(order, ProtocolLength::market_data_packet_header_length))
+            std::make_unique<MarketDataPacketHeaderParser>(order))
         , incremental_packet_parser_(nullptr)
         , snapshot_packet_parser_(nullptr)
         , parsed_length_(0)

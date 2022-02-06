@@ -15,7 +15,7 @@ void SimbaSpectraDecoder::Parse(std::ifstream& file)
         incremental_packet_parser_->Parse(file);
     } else {    
         snapshot_packet_parser_ = std::make_unique<SnapshotPacketParser>(
-            order_, length_
+            order_
         );
         snapshot_packet_parser_->Parse(file);
         length_ -= snapshot_packet_parser_->GetParsedLength();

@@ -50,6 +50,7 @@ void PcapGlobalHeaderParser::Parse(std::ifstream& file)
 
 void PcapGlobalHeaderParser::PrintInfo() const
 {
+    std::cout << "Pcap global header info:\n";
     if (order_ == Order::big_endian) {
         std::cout << "Order: big-endian\n";
     } else {

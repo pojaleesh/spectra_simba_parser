@@ -12,12 +12,13 @@ void IncrementalPacketHeaderParser::Parse(std::ifstream& file)
 
 void IncrementalPacketHeaderParser::PrintInfo() const
 {
+    std::cout << "Incremental packet header info:\n";
     std::cout << "Transaction time: " << header_.transaction_time << "\n";
     if (header_.exchange_trading_session_id == 0xffffffff) {
-        std::cout << "Exchange trading session id: NULL\n";
+        std::cout << "Exchange trading session id: NULL\n\n";
     } else {
         std::cout << "Exchange trading session id: "
-            << header_.exchange_trading_session_id << "\n";
+            << header_.exchange_trading_session_id << "\n\n";
     }
 }
 
