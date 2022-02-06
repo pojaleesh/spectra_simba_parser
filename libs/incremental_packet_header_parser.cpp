@@ -7,7 +7,7 @@ void IncrementalPacketHeaderParser::Parse(std::ifstream& file)
 {
     header_.transaction_time = Parse64bit(file, order_);
     header_.exchange_trading_session_id = Parse32bit(file, order_);
-    parsed_length_ += 12;
+    parsed_length_ += ProtocolLength::incremental_packet_header_length;
 }
 
 void IncrementalPacketHeaderParser::PrintInfo() const
@@ -16,7 +16,8 @@ void IncrementalPacketHeaderParser::PrintInfo() const
     if (header_.exchange_trading_session_id == 0xffffffff) {
         std::cout << "Exchange trading session id: NULL\n";
     } else {
-        std::cout << "Exchange trading session id: " << header_.exchange_trading_session_id << "\n";
+        std::cout << "Exchange trading session id: "
+            << header_.exchange_trading_session_id << "\n";
     }
 }
 
@@ -28,7 +29,7 @@ int IncrementalPacketHeaderParser::GetParsedLength() const
 void IncrementalPacketParser::Parse(std::ifstream& file)
 {
     header_parser_.Parse(file);
-    length_ -= 12;
+    length_ -= ProtocolLength::incremental_packet_header_length;
     while (length_ > 0) {
         SBEParser sbe_parser(order_);
         sbe_parser.Parse(file);

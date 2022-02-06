@@ -32,25 +32,28 @@ static std::unordered_map<char, std::string> MDEntryType {
 
 void OrderUpdateParser::Parse(std::ifstream& file)
 {
-    //std::cout << "-------------------------OrderUpdateParser----------------" << std::endl;
     packet_.md_entry_id = Parse64bitSigned(file, order_);
-    packet_.md_entry_px = 0.00001 * Parse64bitSigned(file, order_);
+    packet_.md_entry_px = Parse64bitSigned(file, order_);
     packet_.md_entry_size = Parse64bit(file, order_);
     packet_.md_flags_set = Parse64bit(file, order_);
     packet_.security_id = Parse32bitSigned(file, order_);
     packet_.rpt_seq = Parse32bit(file, order_);
     packet_.md_update_action = Parse8bit(file, order_);
     packet_.md_entry_type = Parse8bit(file, order_);
-    parsed_length_ += 42;
-    //std::cout << "-------------------------OrderUpdateParser----------------" << std::endl;
+    parsed_length_ += ProtocolLength::order_update_packet_length;
 }
 
 void OrderUpdateParser::PrintInfo() const
 {
-    std::cout << "MD entry id (Идентификатор заявки): " << packet_.md_entry_id << "\n";
-    std::cout << "MD entry px (Цена заявки): " << packet_.md_entry_px << "\n";
-    std::cout << "MD entry size (Объем заявки): " << packet_.md_entry_size << "\n";
-    std::cout << "MD Flags (Типы заявок, битовая маска): " << packet_.md_flags_set << "\n";
+    std::cout << "MD entry id (Идентификатор заявки): "
+        << packet_.md_entry_id << "\n";
+    std::cout << "MD entry px (Цена заявки): "
+        << 0.00001 * packet_.md_entry_px << "\n";
+    std::cout << "MD entry size (Объем заявки): "
+        << packet_.md_entry_size << "\n";
+    std::cout << "MD Flags (Типы заявок, битовая маска): "
+        << packet_.md_flags_set << "\n";
+
     int flag_number = 0;
     for (const auto& [flag, name] : MDFlagsSet) {
         if ((flag & packet_.md_flags_set) == flag) {
@@ -61,6 +64,7 @@ void OrderUpdateParser::PrintInfo() const
     if (flag_number == 0) {
         std::cout << "Никаких флагов в MD Flags" << "\n";
     }
+
     std::cout << "Security id (Числовой идентификатор инструмента.): " 
         << packet_.security_id << "\n";
     std::cout << "RptSeq (Порядковый номер инкрементального обновления.): " 

@@ -9,6 +9,7 @@ void MarketDataPacketHeaderParser::Parse(std::ifstream& file)
     header_.msg_size = Parse16bit(file, order_);
     header_.msg_flags = Parse16bit(file, order_);
     header_.sending_time = Parse64bit(file, order_);
+    parsed_length_ += ProtocolLength::market_data_packet_header_length;
 }
 
 void MarketDataPacketHeaderParser::PrintInfo() const

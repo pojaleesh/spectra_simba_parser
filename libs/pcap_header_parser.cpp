@@ -5,7 +5,6 @@
 
 uint32_t PcapHeaderParser::GetDataLength()
 {
-    // TODO случай когда capt_len != orig_len, то есть пакет был поврежден
     return header_.capt_len;
 }
 

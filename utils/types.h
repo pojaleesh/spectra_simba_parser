@@ -16,7 +16,12 @@ enum ProtocolLength {
     udp_length = 42,
     market_data_packet_header_length = 16,
     incremental_packet_header_length = 12,
-    SBE_header = 8,
+    SBE_header_length = 8,
+    order_execution_packet_length = 66,
+    order_update_packet_length = 42,
+    order_book_snapshot_header_length = 19,
+    order_book_snapshot_record_length = 49,
+    best_prices_header_length=3,
 };
 
 enum MsgId {
@@ -92,7 +97,7 @@ struct SBEMessage {
 
 struct OrderUpdatePacket {
     int64_t md_entry_id;                            //  Bid identifier 64 bit
-    double md_entry_px;                             //  Bid price 64 bit 
+    int64_t md_entry_px;                             //  Bid price 64 bit 
     int64_t md_entry_size;                          //  Bid volume 64 bit 
     uint64_t md_flags_set;                          //  Bid types 64 bit
     int32_t security_id;                            //  Numeric identifier tool 32 bit.

@@ -13,6 +13,7 @@ void SBEHeaderParser::Parse(std::ifstream& file)
     header_.template_id = Parse16bit(file, order_);
     header_.schema_id = Parse16bit(file, order_);
     header_.version = Parse16bit(file, order_);
+    parsed_length_ += ProtocolLength::SBE_header_length;
 }
 
 void SBEHeaderParser::PrintInfo() const
@@ -73,7 +74,7 @@ int SBEHeaderParser::GetParsedLength() const
 void SBEParser::Parse(std::ifstream& file) {
     header_parser_->Parse(file);
     auto msg_id = header_parser_->GetMessageId();
-    parsed_length_ += 8;
+    parsed_length_ += header_parser_->GetParsedLength();
     switch (msg_id.first)
     {
         case MsgId::OrderUpdate:

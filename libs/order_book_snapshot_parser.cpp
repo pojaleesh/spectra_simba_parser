@@ -22,7 +22,7 @@ void OrderBookSnapshotParser::Parse(std::ifstream& file)
     packet_.exchange_trading_session_id = Parse32bit(file, order_);
     packet_.block_len = Parse16bit(file, order_);
     packet_.group_size = Parse8bit(file, order_);
-    parsed_length_ += 19;
+    parsed_length_ += ProtocolLength::order_book_snapshot_header_length;
     for (int i = 0; i < packet_.group_size; i++) {
         OrderBookSnapshotRecord record;
         record.md_entry_id = Parse64bitSigned(file, order_);
@@ -33,7 +33,7 @@ void OrderBookSnapshotParser::Parse(std::ifstream& file)
         record.md_flags_set = Parse64bit(file, order_);
         record.md_entry_type = Parse8bit(file, order_);
         packet_.records.push_back(record);
-        parsed_length_ += 49;
+        parsed_length_ += ProtocolLength::order_book_snapshot_record_length;
     }
 }
 

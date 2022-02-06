@@ -39,27 +39,35 @@ void OrderExecutionParser::Parse(std::ifstream& file)
     packet_.rpt_seq = Parse32bit(file, order_);
     packet_.md_update_action = Parse8bit(file, order_);
     packet_.md_entry_type = Parse8bit(file, order_);
-    parsed_length_ += 66;
+    parsed_length_ += ProtocolLength::order_execution_packet_length;
 }
 
 void OrderExecutionParser::PrintInfo() const
 {
 
-    std::cout << "MD entry id (Идентификатор заявки): " << packet_.md_entry_id << "\n";
+    std::cout << "MD entry id (Идентификатор заявки): "
+        << packet_.md_entry_id << "\n";
     if (packet_.md_entry_px == DECIMAL5_NULL) {
         std::cout << "MD entry px (Цена заявки): null" << "\n";
     } else {
-        std::cout << "MD entry px (Цена заявки): " << 0.00001 * packet_.md_entry_px << "\n";
+        std::cout << "MD entry px (Цена заявки): "
+            << 0.00001 * packet_.md_entry_px << "\n";
     }
     if (packet_.md_entry_size == INT64_NULL) {
         std::cout << "MD entry size (Объем заявки): null" << "\n";
     } else {
-        std::cout << "MD entry size (Объем заявки): " << packet_.md_entry_size << "\n";
+        std::cout << "MD entry size (Объем заявки): "
+            << packet_.md_entry_size << "\n";
     }
-    std::cout << "Last px (Цена сделки): " << 0.00001 * packet_.last_px << "\n";
-    std::cout << "Last qty (Объем сделки): " << packet_.last_qty << "\n";
-    std::cout << "Trade id (Идентификатор сделки): " << packet_.trade_id << "\n";
-    std::cout << "MD Flags (Типы заявок, битовая маска): " << packet_.md_flags_set << "\n";
+    std::cout << "Last px (Цена сделки): "
+        << 0.00001 * packet_.last_px << "\n";
+    std::cout << "Last qty (Объем сделки): "
+        << packet_.last_qty << "\n";
+    std::cout << "Trade id (Идентификатор сделки): "
+        << packet_.trade_id << "\n";
+    std::cout << "MD Flags (Типы заявок, битовая маска): " 
+        << packet_.md_flags_set << "\n";
+
     int flag_number = 0;
     for (const auto& [flag, name] : MDFlagsSet) {
         if ((flag & packet_.md_flags_set) == flag) {
@@ -67,9 +75,10 @@ void OrderExecutionParser::PrintInfo() const
             std::cout << flag_number << ". " << name << "\n";
         }
     }
-    if (flag_number == 0) {
+    if (!flag_number) {
         std::cout << "Никаких флагов в MD Flags" << "\n";
     }
+
     std::cout << "Security id (Числовой идентификатор инструмента.): " 
         << packet_.security_id << "\n";
     std::cout << "RptSeq (Порядковый номер инкрементального обновления.): " 

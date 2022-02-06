@@ -7,7 +7,7 @@
 
 class PcapDataParser : public AbstractParser {
 public:
-    PcapDataParser(int packet_length = 42)      //  Ethernet 2 + IPV4 + UDP
+    PcapDataParser(int packet_length)      //  Ethernet 2 + IPV4 + UDP
         : packet_length_(packet_length)
         , parsed_length_(0)
     { }
