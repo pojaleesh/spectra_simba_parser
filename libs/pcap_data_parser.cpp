@@ -14,12 +14,9 @@ void PcapDataParser::Parse(std::ifstream& file)
         (unsigned char)(bytes[35]);
     data_.destination_port = ((unsigned char)(bytes[36]) << 8) | 
         (unsigned char)(bytes[37]);
-
-    bytes_.resize(bytes.size() - 42 + 1);
-    std::copy(bytes.begin() + 42, bytes.end(), bytes_.begin());
 }
 
-void PcapDataParser::PrintInfo()
+void PcapDataParser::PrintInfo() const
 {
     std::cout << "Header check sum: " << data_.header_check_sum << "\n";
     std::cout << "Source address: " << data_.source_address << " -> " << "Destination address: " << data_.destination_address << "\n";
@@ -27,7 +24,7 @@ void PcapDataParser::PrintInfo()
     std::cout << "Destination port: " << data_.destination_port << "\n\n";
 }
 
-std::vector<int> PcapDataParser::GetSimbaPacketData()
+int PcapDataParser::GetParsedLength() const
 {
-    return bytes_;
+    return parsed_length_;
 }

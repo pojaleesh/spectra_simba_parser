@@ -37,10 +37,15 @@ void PcapHeaderParser::Parse(std::ifstream& file)
     ParseOriginalLength(file);
 }
 
-void PcapHeaderParser::PrintInfo()
+void PcapHeaderParser::PrintInfo() const
 {
     std::cout << "Original length: " << header_.orig_len << '\n';
     std::cout << "Captured length: " << header_.capt_len << '\n';
     std::cout << "Timestamp seconds: " << header_.ts_sec << '\n';
     std::cout << "Timestamp microseconds: " << header_.ts_usec << '\n';
+}
+
+int PcapHeaderParser::GetParsedLength() const
+{
+    return parsed_length_;
 }

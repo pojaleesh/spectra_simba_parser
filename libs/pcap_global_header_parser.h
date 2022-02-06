@@ -6,7 +6,8 @@
 class PcapGlobalHeaderParser : public AbstractParser {
 public:
     void Parse(std::ifstream& file) override;
-    void PrintInfo() override;
+    void PrintInfo() const override;
+    int GetParsedLength() const override;
     Order GetOrder();
 
 private:
@@ -18,4 +19,5 @@ private:
 
     Order order_;
     PcapGlobalHeader header_;
+    int parsed_length_{};
 };

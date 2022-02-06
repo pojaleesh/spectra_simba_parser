@@ -10,7 +10,8 @@ public:
     { }
 
     void Parse(std::ifstream& file) override;
-    void PrintInfo() override;
+    void PrintInfo() const override;
+    int GetParsedLength() const override;
     uint32_t GetDataLength();
 
 private:
@@ -21,4 +22,5 @@ private:
 
     PcapPacketHeader header_;
     Order order_;
+    int parsed_length_;
 };

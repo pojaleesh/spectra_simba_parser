@@ -48,7 +48,7 @@ void PcapGlobalHeaderParser::Parse(std::ifstream& file)
     ParseLinkType(file);
 }
 
-void PcapGlobalHeaderParser::PrintInfo()
+void PcapGlobalHeaderParser::PrintInfo() const
 {
     if (order_ == Order::big_endian) {
         std::cout << "Order: big-endian\n";
@@ -59,4 +59,9 @@ void PcapGlobalHeaderParser::PrintInfo()
     std::cout << "Minor version: " << header_.minor_version << "\n";
     std::cout << "Snap len: " << header_.snap_len << "\n";
     std::cout << "Link type: " << header_.link_type << "\n\n"; 
+}
+
+int PcapGlobalHeaderParser::GetParsedLength() const
+{
+    return parsed_length_;
 }
